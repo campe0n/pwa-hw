@@ -4,16 +4,25 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "webpack": "webpack --watch",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "prestart": "npm run webpack"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/core": "^7.14.8",
+    "@babel/preset-env": "^7.14.8",
+    "babel-loader": "^8.2.2",
     "compression": "^1.7.4",
     "express": "^4.17.1",
     "mongoose": "^5.13.3",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "webpack": "^5.46.0"
+  },
+  "devDependencies": {
+    "webpack-cli": "^4.7.2"
   }
 }
