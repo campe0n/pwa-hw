@@ -54,10 +54,6 @@
     }
   </script>
   <script>
-    const createDB = () => {
-      const name = document.getElementsById("t-name").value;
-      const amount = document.getElementsById("t-amount").value;
-
       const request = window.indexedDB.open("transaction", 1);
     
       request.onupgradeneeded = e => {
@@ -70,15 +66,13 @@
         const db = e.target.result
         const transaction = db.transaction(["transactions"], "readwrite");
         const transactionStore = transaction.objectStore("transactions");
-        const statusIdx = transactionStore.index("statusIdx");
 
-        transactionStore.add({ name: `${name}`, amount: 500});
+        transactionStore.add({ name: "test", amount: 500});
       }
 
       request.onerror = e => {
         const db = e.target.result
       }
-    }
   </script>
 </body>
 </html> 
