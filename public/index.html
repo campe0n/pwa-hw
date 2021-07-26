@@ -54,15 +54,31 @@
     }
   </script>
   <script>
-    // We request a database instance.
-    const request = indexedDB.open("firstDatabase", 1);
-    //deal with this using events
+    const createDB = () => {
+      const name = document.getElementsById("t-name").value;
+      const amount = document.getElementsById("t-amount").value;
+
+      const request = window.indexedDB.open("transaction", 1);
     
-    // This returns a result that we can then manipulate.
-    request.onsuccess = event => {
-      console.log(request.result);
-    };
-    //event handler .onsuccess 
+      request.onupgradeneeded = e => {
+        const db = e.target.result
+
+        const transactionStore = db.createObjectStore("transactions", {keyPath: "name"})
+      }
+
+      request.onsuccess = e => {
+        const db = e.target.result
+        const transaction = db.transaction(["transactions"], "readwrite");
+        const transactionStore = transaction.objectStore("transactions");
+        const statusIdx = transactionStore.index("statusIdx");
+
+        transactionStore.add({ name: `${name}`, amount: 500});
+      }
+
+      request.onerror = e => {
+        const db = e.target.result
+      }
+    }
   </script>
 </body>
 </html> 
