@@ -54,12 +54,18 @@
     }
   </script>
   <script>
+      const name = document.getElementById("t-name").value;
+      const amount = document.getElementById("t-amount").value;
+      const add = document.getElementById("add-btn");
+      const sub = document.getElementById("sub-btn");
       const request = window.indexedDB.open("transaction", 1);
     
+      function createDB() {
       request.onupgradeneeded = e => {
         const db = e.target.result
 
         const transactionStore = db.createObjectStore("transactions", {keyPath: "name"})
+        const transactionIdx = transactionStore.index("transactionIdx", { unique: false});
       }
 
       request.onsuccess = e => {
@@ -67,12 +73,16 @@
         const transaction = db.transaction(["transactions"], "readwrite");
         const transactionStore = transaction.objectStore("transactions");
 
-        transactionStore.add({ name: "test", amount: 500});
+        transactionStore.add({ name: `${name}`, amount: `${amount}`});
       }
 
       request.onerror = e => {
         const db = e.target.result
+
       }
+      }
+      add.addEventListener('submit', createDB);
+      sub.addEventListener('submit', createDB);
   </script>
 </body>
 </html> 
