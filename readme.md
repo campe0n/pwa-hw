@@ -1,7 +1,5 @@
 # Progressive Web App
 
-![Link](https://img.shields.io/github/license/campe0n/readme_generator?label=MIT&message=MIT&style=flat-square)
-
 ## Description
 
 This project has incorporated progressive web application concepts such as manifest.json, service worker and uses an IndexedDB to allow some offline functionality.
